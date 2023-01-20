@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>NeuroCave</title>
 </head>
-<script type="text/javascript" src="./public/main.js"></script>
-
+<!--<script type="text/javascript" src="./public/main.js"></script>-->
+<!-- import d3 -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
 //    loadVisualization = function (folderName) {
@@ -78,7 +79,7 @@ Olusola Ajilore, and Allen Ye, all belonging to UIC Department of Psychiatry.
     </ul>
 
     <p></p>
-    <input id = 'folderSelect' type = 'file' onchange="getfolder(event)" webkitdirectory directory multiple/>Choose data folder</input>
+    <input id = 'folderSelect' type = 'file' webkitdirectory directory multiple/>Choose data folder</input>
     <p></p>
     <select id = "Atlas" class = "jumpmenu"></select>
     <label>Choose Atlas</label>
@@ -90,64 +91,39 @@ Olusola Ajilore, and Allen Ye, all belonging to UIC Department of Psychiatry.
 <script type="text/Javascript">
     var list = null;
     var atlas = null;
-    // it is assumed all data folder should have an index.txt file describing its contents
-    var lookForAtlases = function (callback) {
-        Papa.parse("data/index.txt", {
-            download: true,
-            delimiter: ",",
-            dynamicTyping: true,
-            header: false,
-            skipEmptyLines: true,
-            complete: function (results) {
-                list = results.data[0];
-                console.log("Look-up Table list loaded ... ");
-                callback(null, null);
-            }
-        });
-    };
-
-    // initialize variables:
-    // folder : is the folder containing data
-    // menu : will contain the different atlases
-    init = function () {
-        console.log("Init...");
-        atlas = list[0];
-        console.log("Current Atlas = " + atlas);
-        var menu = document.getElementById("Atlas");
-        var folder = '';
-        console.log("Current folder = " + folder);
-        for(var i = 0; i < 3; i++) {
-            var el = document.createElement("option");
-            el.textContent = list[i];
-            el.value = list[i];
-            el.selected = (i==0);
-            menu.appendChild(el);
-        }
-        menu.onchange = function () {
-            atlas = list[this.selectedIndex];
-            console.log("Current Atlas = " + atlas);
-        };
-    };
-
-    // get user selected folder info
-    getfolder = function (e) {
+    var folder = null;
+    //create listener for folder selection
+    document.getElementById('folderSelect').addEventListener('change', function(e) {
         var files = e.target.files;
-        if (files) {
-            if (files.length == 0) {
-                alert("Empty directory!!!")
-            } else {
-                folder = files[0].webkitRelativePath.split('/')[0];
-                console.log("Selected folder = " + folder)
-            }
+        folder = files[0].webkitRelativePath.split('/')[0];
+        console.log(folder);
+    });
+    // read index.txt a comma seperated list of atlas names, use naems to populate the atlas drop down menu
+    d3.text("data/index.txt", function(error, text) {
+        if (error) throw error;
+        list = text.split(",");
+        var select = document.getElementById("Atlas");
+        for (var i = 0; i < list.length; i++) {
+            var opt = list[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            select.appendChild(el);
         }
-    };
+        atlas=list[0];
+    });
+        // set the default atlas to the first one in the list
 
-    // populate the Atlas dropdown menu
-    queue()
-        .defer(lookForAtlases)
-        .awaitAll(function () {
-            init();
-        });
+        // create listener for atlas selection
+    document.getElementById('Atlas').addEventListener('change', function(e) {
+            atlas = e.target.value;
+            // log the atlas name
+            console.log("atlas: "); console.log(atlas);
+    });
+
+
+
+
 
 </script>
 
