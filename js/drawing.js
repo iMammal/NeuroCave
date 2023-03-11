@@ -18,6 +18,8 @@ var root;                           // the index of the root node = start point 
 
 var thresholdModality = true;
 var enableEB = false;
+var enableIpsi = false;
+var enableContra = false;
 
 var vr = false;                     // enable VR
 var spt = false;                    // enabling shortest path
@@ -31,6 +33,7 @@ import {isLoaded, dataFiles,mobile} from "./globals";
 import {
     addEdgeBundlingCheck,
     addModalityButton,
+	addLateralityCheck,
     removeGeometryButtons,
     addOpacitySlider,
     addThresholdSlider,
@@ -309,6 +312,7 @@ var initControls = function () {
     //addEdgeBundlingCheck();
     addModalityButton();
     addThresholdSlider();
+	addLateralityCheck();
     addColorGroupList();
     addTopologyMenu(modelLeft, 'Left');
     addTopologyMenu(modelRight, 'Right');
@@ -384,6 +388,41 @@ var setThreshold = function(value) {
     modelLeft.setThreshold(value);
     modelRight.setThreshold(value);
 };
+
+//enable Ipsilaterality
+var enableIpsilaterality = function (enable) {
+	enableIpsi = enable;
+
+	console.log("IPSI:"+enable);
+
+    modelLeft.computeEdgesForTopology(modelLeft.getActiveTopology());
+    modelRight.computeEdgesForTopology(modelRight.getActiveTopology());
+
+    previewAreaLeft.removeEdgesFromScene();
+    previewAreaRight.removeEdgesFromScene();
+
+    previewAreaLeft.drawConnections();
+    previewAreaRight.drawConnections();
+
+}
+
+//enable Contralaterality
+var enableContralaterality = function (enable) {
+	enableContra = enable;
+
+	console.log("CONTRA:"+enable);
+
+    modelLeft.computeEdgesForTopology(modelLeft.getActiveTopology());
+    modelRight.computeEdgesForTopology(modelRight.getActiveTopology());
+
+    previewAreaLeft.removeEdgesFromScene();
+    previewAreaRight.removeEdgesFromScene();
+
+    previewAreaLeft.drawConnections();
+    previewAreaRight.drawConnections();
+
+}
+
 
 // enable edge bundling
 var enableEdgeBundling = function (enable) {
@@ -563,6 +602,10 @@ var setNodesSelected = function (arrIndex, newNodeVal) {
 
 var getEnableEB = function () { return enableEB };
 
+var getEnableIpsi = function () { return enableIpsi };
+
+var getEnableContra = function () { return enableContra };
+
 var getVisibleNodesLength = function (arrIndex) { return visibleNodes.length }
 
 var getVisibleNodes = function (arrIndex) { return visibleNodes[arrIndex] }
@@ -573,4 +616,4 @@ var getThresholdModality = function () { return thresholdModality }
 
 var setThresholdModality = function (modality) { thresholdModality = modality }
 
-export {changeSceneToSubject, initControls, initCanvas, changeActiveGeometry, changeColorGroup, setRoot, getRoot, getSpt, updateScenes, updateNodesVisiblity, redrawEdges, updateOpacity, glyphNodeDictionary, previewAreaLeft, previewAreaRight, getNodesSelected, setNodesSelected, clrNodesSelected, getVisibleNodes, getVisibleNodesLength, setVisibleNodes, getEnableEB, getThresholdModality, setThresholdModality };
+export {changeSceneToSubject, initControls, initCanvas, changeActiveGeometry, changeColorGroup, setRoot, getRoot, getSpt, updateScenes, updateNodesVisiblity, redrawEdges, updateOpacity, glyphNodeDictionary, previewAreaLeft, previewAreaRight, getNodesSelected, setNodesSelected, clrNodesSelected, getVisibleNodes, getVisibleNodesLength, setVisibleNodes, getEnableEB, getEnableIpsi, getEnableContra, enableIpsilaterality, enableContralaterality, getThresholdModality, setThresholdModality };
