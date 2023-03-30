@@ -69,7 +69,17 @@ function onDocumentMouseMove(model, event) {
 
 }
 
-var updateNodeMoveOver = function (model, intersectedObject) {
+//////////////////////////////////////////////////////////////////////////////////////////////
+// This logic is a bit complicated, because it needs to handle all the cases where the user mouses over or
+// points a VR controller at a node and then moves the mouse or controller away from the node.
+//
+// It updates any glyphs that may be hovered over or pointed at in VR and resets them to their normal state
+// INPUT: model, inrtersetedObject: self explanatory, mode: 1 = mouse , 2,4 = VR controllers
+// Since there are two preview areas and the mouse and Touch controllers can work independently when one is in VR mode,
+// any pointed-at or hovered-over glyphs need to be highlighted in both preview areas and if EITHER pointing device's ray
+// intersects with a glyph, that glyph should be highlighted
+///////////////////////////////////////////////////////////////////////////////////////////
+var updateNodeMoveOver = function (model, intersectedObject, mode) {
     var nodeIdx, region, nodeRegion;
     if ( intersectedObject ) {
         nodeIdx = glyphNodeDictionary[intersectedObject.object.uuid];
@@ -616,4 +626,4 @@ var getThresholdModality = function () { return thresholdModality }
 
 var setThresholdModality = function (modality) { thresholdModality = modality }
 
-export {changeSceneToSubject, initControls, initCanvas, changeActiveGeometry, changeColorGroup, setRoot, getRoot, getSpt, updateScenes, updateNodesVisiblity, redrawEdges, updateOpacity, glyphNodeDictionary, previewAreaLeft, previewAreaRight, getNodesSelected, setNodesSelected, clrNodesSelected, getVisibleNodes, getVisibleNodesLength, setVisibleNodes, getEnableEB, getEnableIpsi, getEnableContra, enableIpsilaterality, enableContralaterality, getThresholdModality, setThresholdModality };
+export {changeSceneToSubject, initControls, initCanvas, changeActiveGeometry, changeColorGroup, setRoot, getRoot, getSpt, updateScenes, updateNodesVisiblity, updateNodeMoveOver , updateNodeSelection, redrawEdges, updateOpacity, glyphNodeDictionary, previewAreaLeft, previewAreaRight, getNodesSelected, setNodesSelected, clrNodesSelected, getVisibleNodes, getVisibleNodesLength, setVisibleNodes, getEnableEB, getEnableIpsi, getEnableContra, enableIpsilaterality, enableContralaterality, getThresholdModality, setThresholdModality };
