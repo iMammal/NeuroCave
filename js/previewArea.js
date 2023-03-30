@@ -1106,16 +1106,7 @@ function PreviewArea(canvas_, model_, name_) {
     }
 
 
-    // get the object pointed by the controller
-    var getPointedObject = function (controller) {
-        var raycaster = new THREE.Raycaster();
-        raycaster.setFromCamera({x: 0, y: 0}, camera);
-        var intersects = raycaster.intersectObjects(brain.children, true);
-        if (intersects.length > 0) {
-            return intersects[0].object;
-        }
-        return null;
-    }
+
 
     // initialize scene: init 3js scene, canvas, renderer and camera; add axis and light to the scene
     var initScene = function () {
