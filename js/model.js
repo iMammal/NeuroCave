@@ -513,8 +513,10 @@ function Model(side) {
                 const result = idx; // Store the current value of idx
                 idx++; // Increment idx for the next iteration
                 return result;
+            } else {
+
             }
-            return -1; // Return -1 for (j < i) entries
+            //return -1; // Return -1 for (j < i) entries
         }, true); // skipZeros=true
 
         edgeIdx.forEach((value, index) => {
