@@ -15,10 +15,9 @@ NeuroCave [2] facilitates the comparison of structural connectomes,
 such as male and female group studies [3], different functional
 connectomes, such as those of participants performing different cognitive, spatial or verbal tasks, and to explore the brain’s intrinsic
 structure [1] through the visualization of connectomes in topological
-space coupled with clustering information. Given its capabilities, ++
+space coupled with clustering information. Given its capabilities, 
 which include interactive web-based viewports for comparing brain
-connectomes as node-link diagrams, color mapping features for highlighting brain anatomy and brain clusters, and an optional VR modewe based our visualization of the 2023 IEEE SciVis Contest simulation data on a newly updated version of NeuroCave, called NeuroCavePlus (https://github.com/iMammal/NeuroCave/tree/Dev-WebXR-x4.1-instancing-alpha), adding a number of ad-
-ditional features and scalability upgrades to support visualizing and
+connectomes as node-link diagrams, color mapping features for highlighting brain anatomy and brain clusters, and an optional VR modewe based our visualization of the 2023 IEEE SciVis Contest simulation data on a newly updated version of NeuroCave, called NeuroCavePlus, adding a number of additional features and scalability upgrades to support visualizing and
 interacting with large scale brain simulations. 
 
 NeuroCavePlus is a work in progress, this prototype was developed for the IEEE 2023 SciVis Contest. (https://sciviscontest2023.github.io).
