@@ -11,6 +11,8 @@ Figure 9: Calcium-variation Dataset. Topo: Isomap (Left), UMAP (Right); Colors: 
 ![alt text]( readme_images/NeuroCave_Lesion50kCroissantUMAPScreenshot.png "Engram Encoding lesion Timestep in UMAP topology and color coding (left) shown alongside anatomical brain with same UMAP color
 coding.")
 
+[![Demo Video](PlayMovieNCP2023-12-06 21-08-44.png)](https://youtu.be/GM9m_6kYDpg)
+
 NeuroCave [2] facilitates the comparison of structural connectomes,
 such as male and female group studies [3], different functional
 connectomes, such as those of participants performing different cognitive, spatial or verbal tasks, and to explore the brain’s intrinsic
