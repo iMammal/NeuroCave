@@ -1,2 +1,4 @@
 subjectID,network,topology
+cellsAndGenes,comboSTRINGNWhalf.json,comboTopology.csv
+rnaseq,rna2proteinSTRINGNW.json,proteinTopologyR5.csv
 PciSeq,Network.csv,Topology.csv

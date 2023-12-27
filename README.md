@@ -7,11 +7,11 @@
 ![alt text]( readme_images/NeuroCave_LesionStimulus50kCroissantUMAPScreenshot.png   "Lesion (left) and Stimulus (right) both at 50,000 ms after induction, showing formation of engram line attractor with UMAP Coordinates
 and Original Anatomy node colors to show how original groups boundaries are transformed in the mapping.
 Figure 9: Calcium-variation Dataset. Topo: Isomap (Left), UMAP (Right); Colors: Isomap.")
-
+ ////////
 ![alt text]( readme_images/NeuroCave_Lesion50kCroissantUMAPScreenshot.png "Engram Encoding lesion Timestep in UMAP topology and color coding (left) shown alongside anatomical brain with same UMAP color
 coding.")
 
-[![Demo Video]( readme_images/PlayMovieNCP2023-12-06 21-08-44.png)](https://youtu.be/GM9m_6kYDpg)
+<A HREF="https://youtu.be/GM9m_6kYDpg"><IMG SRC="readme_images/PlayMovieNCP2023-12-06 21-08-44.png"></A>
 
 NeuroCave [2] facilitates the comparison of structural connectomes,
 such as male and female group studies [3], different functional
@@ -39,7 +39,7 @@ connectome datasets. Network Neuroscience, 2(3):344–361, 2018.
 [3] J. J. G. Keiriz, L. Zhan, M. Chukhman, O. Ajilore, A. D. Leow, and A. G.
 Forbes. Exploring the human connectome topology in group studies,
 
-![alt text]( readme_images/SciVis2023ContestCertScreenshot2023-12-06 21-22-52.png "Winner of the Best Report Cover Image Award at IEEE SciVis 2023 Challenge")
+<img src="readme_images/SciVisAwardScreenshot2023-12-06 21-39-56.png" width="60%" height="60%" ALT="Winner of the Best Report Cover Image Award at IEEE SciVis 2023 Challenge">
 
 -------------------------------------------------------------
 # NeuroCave

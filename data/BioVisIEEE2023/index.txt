@@ -1,2 +1,3 @@
 subjectID,network,topology
 panCanProtein,proteinSTRINGNW300.json,proteinTopology.csv
+panCanProteinHuMap2,comboNetworkHuMap2.json,proteinTopology.csv
