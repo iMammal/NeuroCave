@@ -13,7 +13,7 @@ class XRInterface {
     this.assignPreviewData();
 
 
-
+ 
     this.initializeControllers();
     this.initializeXRSettings();
 
@@ -28,6 +28,7 @@ class XRInterface {
     this.enableVR = true;
     this.activateVR = false;
 
+    this.sprintFactor = 1.0;
 
     this.initializeControlCallbacks();
 
@@ -87,8 +88,8 @@ class XRInterface {
     //this.previewArea.NodeManager.contextualNodeActivated = this.dragSelectNode.bind(this);
     //if preview area camera is not at 0,0,0, set it to 0,0,0
     if(this.previewArea.camera.position.x !== 0 || this.previewArea.camera.position.y !== 0 || this.previewArea.camera.position.z !== 0){
-      console.log("Camera position is not 0,0,0, setting to 0,0,0");
-      this.previewArea.camera.position.set(0,0,0);
+      // console.log("Camera position is not 0,0,0, setting to 0,0,0");
+      // this.previewArea.camera.position.set(0,0,0);
     }
     this._camera = this.previewArea.camera;
     this._controls = this.previewArea.controls;
@@ -296,8 +297,13 @@ class XRInterface {
       // }
 
       this.camera = this.renderer.xr.getCamera();
+
+
       if (this.camera !== this.previewArea.camera) {
         console.warn("Camera changed to xr camera");
+        //move this.dolly to the new camera position
+        this.dolly.position.set(this._camera.position.x, this._camera.position.y, this._camera.position.z);
+        this.dolly.rotation.set(this._camera.rotation.x, this._camera.rotation.y, this._camera.rotation.z);
         //change camera to xr camera
         this.previewArea.camera = this.camera;
       }
@@ -432,11 +438,23 @@ class XRInterface {
     let rotation = new THREE.Vector3(0, 0, 0);
     let translationDistance = 0;
     let rotDistance = 0;
+    let leftThumbstickPress = leftgamepad.buttons[3].pressed;
+    let rightThumbstickPress = rightgamepad.buttons[3].pressed;
+
     //find final translation and rotation based on thumbstick movement and delta time
+
+
+    if (leftThumbstickPress) {
+        this.sprintFactor = this.sprintFactor + delta * 12.0;
+    } else {
+    	this.sprintFactor = 1.0;
+    }
+
+    //console.log("left thumbstick button:", leftThumbstickPress, this.sprintFactor);
 
     //use axes 3 for forward and backward movement, -1 is forward, 1 is backward
     if (leftgamepad.axes[3] > this.XRControlDeadzone || leftgamepad.axes[3] < -this.XRControlDeadzone) {
-      translation.z = leftgamepad.axes[3] * this.XRMaximumSpeed * delta;
+      translation.z = leftgamepad.axes[3] * this.XRMaximumSpeed * delta * this.sprintFactor;
     }
     // //use axes 2 for strafing left and right, -1 is left, 1 is right
     // if (leftgamepad.axes[2] > this.XRControlDeadzone || leftgamepad.axes[2] < -this.XRControlDeadzone) {
@@ -483,8 +501,7 @@ class XRInterface {
     //set raycaster origin to controller position
     raycaster.set(controllerPosition, controllerDirection);
     //get intersected objects
-    // let objectsIntersected = raycaster.intersectObjects(this.scene.children);
-    // return (objectsIntersected.find(o => o.object.name.type === 'region'));
+    //let objectsIntersected = raycaster.intersectObjects(this.scene.children);
     let nodes = this.scene.children.filter(o => o.name === 'NodeManager');
     let objectsIntersected = [];
     if (nodes.length > 0) {
